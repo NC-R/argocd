@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: app1-prod
-  namespace: argocd
+  namespace: prod
 spec:
   project: app1
   source:
@@ -15,6 +15,5 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
-      prune: true
     syncOptions:
       - CreateNamespace=true
