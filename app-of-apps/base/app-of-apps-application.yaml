@@ -7,7 +7,7 @@ spec:
   destination:
     name: in-cluster
     namespace: argocd
-  project: ocp
+  project: okd
   source:
     repoURL: "https://github.com/NC-R/argocd"
     targetRevision: main
