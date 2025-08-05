@@ -1,4 +1,4 @@
 resources:
-  - ../environments/project/app1.yaml
+  - ../environments/project/
   - dev-apps.yaml
   - prod-apps.yaml
