@@ -4,7 +4,7 @@ metadata:
   name: app1-dev
   namespace: argocd
 spec:
-  project: default
+  project: app1
   source:
     repoURL: https://github.com/NC-R/argocd
     path: apps/app1/overlays/dev
@@ -15,5 +15,6 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
+      prune: true
     syncOptions:
       - CreateNamespace=true
