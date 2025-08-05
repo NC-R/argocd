@@ -1,4 +1,4 @@
 resources:
-  - ../projects/
+  - ../projects/app1.yaml
   - dev-apps.yaml
   - prod-apps.yaml
