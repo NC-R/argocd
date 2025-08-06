@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/argocd.iml" filepath="$PROJECT_DIR$/.idea/argocd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../git-deployment/.idea/git-deployment.iml" filepath="$PROJECT_DIR$/../git-deployment/.idea/git-deployment.iml" />
     </modules>
   </component>
 </project>

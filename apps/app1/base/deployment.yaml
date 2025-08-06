@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1
+  namespace: app1
+  labels:
+    app: app1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app1
+  template:
+    metadata:
+      labels:
+        app: app1
+    spec:
+      containers:
+        - name: app1
+          image: reg.rsn-okd.netcloud.lab:8880/app1/app1@sha256:fea51815589c14dde9ec353713cbb6f272eb1d319cb2677561a86f61cda7dbaf
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1
+  namespace: app1
+  labels:
+    app: app1
+spec:
+  selector:
+    app: app1
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: app1
+  namespace: app1
+spec:
+  to:
+    kind: Service
+    name: app1
+  port:
+    targetPort: 80
+  tls:
+    termination: edge  # Optional: Entfernen, wenn unverschlüsselt
