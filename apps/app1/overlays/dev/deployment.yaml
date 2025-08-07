@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: app1-dev
-          image: reg.rsn-okd.netcloud.lab:8880/app1/app1@sha256:2923c1081c48b38bc512d344d81d1626c7ae5ba24d0bbda109075163399d30d0
+          image: reg.rsn-okd.netcloud.lab:8880/app1/app1:latest
           ports:
             - containerPort: 80
 
