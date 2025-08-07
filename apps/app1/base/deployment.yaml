@@ -50,4 +50,4 @@ spec:
   port:
     targetPort: 80
   tls:
-    termination: edge  # Optional: Entfernen, wenn unverschlüsselt
+    termination: edge
