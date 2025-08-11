@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app1
-          image: reg.rsn-okd.netcloud.lab:8880/app1/app1@sha256:25f28e2d1668c9662767e7202a380fd5e9eb13773a97628ac5d0117ac372a611
+          image: reg.rsn-okd.netcloud.lab:8880/app1:latest
           ports:
             - name: http
               containerPort: 8080
