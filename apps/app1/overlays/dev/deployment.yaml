@@ -43,7 +43,7 @@ spec:
     - name: http
       protocol: TCP
       port: 8080
-      targetPort: http
+      targetPort: 8080
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
@@ -55,6 +55,6 @@ spec:
     kind: Service
     name: app1
   port:
-    targetPort: http   # immer den Service-PortNAMEN referenzieren
+    targetPort: 8080
   tls:
     termination: edge
