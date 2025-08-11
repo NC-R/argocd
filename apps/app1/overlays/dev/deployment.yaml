@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app1
-          image: reg.rsn-okd.netcloud.lab:8880/app1:latest
+          image: reg.rsn-okd.netcloud.lab:8880/app1/app1:latest
           ports:
             - name: http
               containerPort: 8080
