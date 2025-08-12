@@ -5,4 +5,4 @@ resources:
   - ../../base
 images:
   - name: reg.rsn-okd.netcloud.lab:8880/app1/app1
-    newTag: jlkj2132k
+    newTag: 992485b5
