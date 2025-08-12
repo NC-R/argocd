@@ -29,32 +29,3 @@ spec:
           # livenessProbe:
           #   httpGet: { path: /health, port: http }
           #   initialDelaySeconds: 10
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: app1
-  namespace: argocd
-  labels: { app: app1 }
-spec:
-  selector:
-    app: app1
-  ports:
-    - name: http
-      protocol: TCP
-      port: 8080
-      targetPort: http
----
-apiVersion: route.openshift.io/v1
-kind: Route
-metadata:
-  name: app1
-  namespace: argocd
-spec:
-  to:
-    kind: Service
-    name: app1
-  port:
-    targetPort: http   # immer den Service-PortNAMEN referenzieren
-  tls:
-    termination: edge

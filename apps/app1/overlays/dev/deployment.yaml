@@ -1,10 +1,22 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: app1
+  name: dev-app1
   namespace: argocd
   labels: { app: app1 }
+  annotations:
+    # Welches Image wird getrackt (Alias: app1)
+    argocd-image-updater.argoproj.io/image-list: app1=reg.rsn-okd.netcloud.lab:8880/app1/app1
+    # Update-Strategie: "latest" (jüngster Build)
+    argocd-image-updater.argoproj.io/app1.update-strategy: latest
+    # Git Write-Back (legt .argocd-source-<app>.yaml an)
+    argocd-image-updater.argoproj.io/write-back-method: git
+    # (empfohlen) Branch explizit setzen
+    argocd-image-updater.argoproj.io/git-branch: main
+    # optional: Registry-Creds falls privat
+    # argocd-image-updater.argoproj.io/app1.pull-secret: secret:argocd/harbor-creds
 spec:
+  project: default
   replicas: 1
   selector:
     matchLabels: { app: app1 }
@@ -12,23 +24,37 @@ spec:
     metadata:
       labels: { app: app1 }
     spec:
-      containers:
-        - name: app1
-          image: reg.rsn-okd.netcloud.lab:8880/app1/app1:latest
-          ports:
-            - name: http
-              containerPort: 8080
-          # optional, aber sinnvoll in OpenShift:
-          securityContext:
-            runAsNonRoot: true
-            allowPrivilegeEscalation: false
-          # readiness/liveness optional, falls du Pfade hast:
-          # readinessProbe:
-          #   httpGet: { path: /health, port: http }
-          #   initialDelaySeconds: 5
-          # livenessProbe:
-          #   httpGet: { path: /health, port: http }
-          #   initialDelaySeconds: 10
+      selector:
+        matchLabels: { app: app1 }
+      template:
+        metadata:
+          labels: { app: app1 }
+        spec:
+          containers:
+            - name: app1
+              image: reg.rsn-okd.netcloud.lab:8880/app1/app1:latest
+              ports:
+                - name: http
+                  containerPort: 8080
+              # optional, aber sinnvoll in OpenShift:
+              securityContext:
+                runAsNonRoot: true
+                allowPrivilegeEscalation: false
+  source:
+    repoURL: https://github.com/NC-R/argocd
+    path: environments/dev
+    targetRevision: main        # <— nicht HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
+
 ---
 apiVersion: v1
 kind: Service

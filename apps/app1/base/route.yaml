@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: app1
+  namespace: argocd
+spec:
+  to:
+    kind: Service
+    name: app1
+  port:
+    targetPort: http   # immer den Service-PortNAMEN referenzieren
+  tls:
+    termination: edge
