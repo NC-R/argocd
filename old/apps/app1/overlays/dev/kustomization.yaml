@@ -1,8 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: app1-dev            # dein Ziel-Namespace
+namespace: app1-dev # dein Ziel-Namespace
 resources:
   - ../../base
 images:
   - name: reg.rsn-okd.netcloud.lab:8880/app1/app1
-    newTag: latest             # AIU ersetzt diesen Tag (Strategy: latest)
+    newTag: 992485b5
