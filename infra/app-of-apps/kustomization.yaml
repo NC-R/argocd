@@ -5,6 +5,6 @@ kind: Kustomization
 resources:
   - ../namespaces/
   - ../argocd-projects/
-  - ../customers/
-  - ../environments/staging1/
-  - ../environments/prod/
+  - ../customers/customers.yaml
+  - ../environments/staging1/applicationset.yaml
+  - ../environments/prod/applicationset.yaml
