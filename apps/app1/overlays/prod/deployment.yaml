@@ -19,7 +19,7 @@ spec:
         - name: app1-prod
           image: reg.rsn-okd.netcloud.lab:8880/app1/app1:latest
           ports:
-            - containerPort: 80
+            - containerPort: 8080
 
 ---
 apiVersion: v1
@@ -34,8 +34,8 @@ spec:
     app: app1-prod
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 8080
+      targetPort: 8080
 
 ---
 apiVersion: route.openshift.io/v1
@@ -48,6 +48,6 @@ spec:
     kind: Service
     name: app1-prod
   port:
-    targetPort: 80
+    targetPort: 8080
   tls:
     termination: edge
