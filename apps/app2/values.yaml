@@ -1,0 +1,15 @@
+# Standard-Image-Definition (wird vom ArgoCD Image Updater überschrieben)
+image:
+  repository: quay.io/openshift/origin-hello-openshift
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+route:
+  enabled: true
+  host: ""    # Wird im ApplicationSet gesetzt
+
+service:
+  type: ClusterIP
+  port: 80

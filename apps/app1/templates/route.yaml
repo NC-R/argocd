@@ -1,0 +1,13 @@
+{{- if .Values.route.enabled }}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ include "app1.fullname" . }}
+spec:
+  host: {{ required "route.host is required" .Values.route.host }}
+  to:
+    kind: Service
+    name: {{ include "app1.fullname" . }}
+  port:
+    targetPort: http
+{{- end }}
