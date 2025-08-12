@@ -1,0 +1,22 @@
+# Produktiv-Kunden-Definition
+customers:
+  - name: kunde1
+    namespace: kunde1
+    apps:
+      - app1
+      - app2
+  - name: kunde2
+    namespace: kunde2
+    apps:
+      - app1
+
+# Basis-Domain für alle generierten Routen
+baseDomain: "apps.rsn-okd.netcloud.lab"
+
+# Staging-Umgebungen
+staging:
+  - name: staging1
+    namespace: staging1
+    apps:
+      - app1
+      - app2

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kunde1
+  labels:
+    environment: prod
+    customer: kunde1
+    managed-by: argocd
+  annotations:
+    openshift.io/display-name: "Customer 1 - Production"
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: kunde1-quota
+  namespace: kunde1
+spec:
+  hard:
+    pods: "10"
+    requests.cpu: "2"
+    requests.memory: "4Gi"
+    limits.cpu: "4"
+    limits.memory: "8Gi"
