@@ -24,3 +24,4 @@ spec:
           ports:
             - containerPort: 8080
               name: http
+          resources: {{- toYaml .Values.resources | nindent 12 }}
