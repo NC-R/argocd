@@ -5,3 +5,4 @@ resources:
   - staging1.yaml
   - kunde1.yaml
   - kunde2.yaml
+  - kargo.yaml

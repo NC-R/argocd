@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - app1-project.yaml
   - app2-project.yaml
+  - kargo-project.yaml
