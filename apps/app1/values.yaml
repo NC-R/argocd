@@ -1,4 +1,3 @@
-# Standard-Image-Definition (wird vom ArgoCD Image Updater überschrieben)
 image:
   repository: reg.rsn-okd.netcloud.lab:8880/app1/app1
   tag: "latest"
@@ -6,9 +5,17 @@ image:
 
 replicaCount: 1
 
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "256Mi"
+
 route:
   enabled: true
-  host: ""    # Wird im ApplicationSet gesetzt
+  host: ""
 
 service:
   type: ClusterIP
