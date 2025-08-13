@@ -4,5 +4,5 @@ helm:
     value: reg.rsn-okd.netcloud.lab:8880/app1/app1
     forcestring: true
   - name: image.tag
-    value: 909bd68b
+    value: 699b960b
     forcestring: true
