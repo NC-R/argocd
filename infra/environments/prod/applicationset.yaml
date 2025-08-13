@@ -14,9 +14,9 @@ spec:
     metadata:
       name: '{{name}}-{{app}}'
       annotations:
-        argocd-image-updater.argoproj.io/image-list: '{{app}}=reg.rsn-okd.netcloud.lab:8880/{{app}}/{{app}}'
-        argocd-image-updater.argoproj.io/{{app}}.update-strategy: newest-build
-        argocd-image-updater.argoproj.io/app1.allow-tags: regexp:^prod$
+        argocd-image-updater.argoproj.io/image-list: app1=reg.rsn-okd.netcloud.lab:8880/app1/app1
+        argocd-image-updater.argoproj.io/app1.allow-tags: regexp:^prod-
+        argocd-image-updater.argoproj.io/app1.update-strategy: semver
         argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
         argocd-image-updater.argoproj.io/git-branch: main
     spec:
