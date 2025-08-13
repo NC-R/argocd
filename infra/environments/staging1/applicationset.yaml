@@ -4,34 +4,33 @@ metadata:
   name: staging1-apps
   namespace: argocd
 spec:
-  goTemplate: true
   generators:
     - git:
         repoURL: https://github.com/NC-R/argocd.git
         revision: main
         files:
-          - path: infra/environments/staging1/apps/*.yaml   # <- ein File je App
+          - path: infra/environments/staging1/apps/*.yaml   # eine Datei je App
   template:
     metadata:
-      name: 'staging1-{{`{{.app}}`}}'
+      name: 'staging1-{{app}}'
       annotations:
-        argocd-image-updater.argoproj.io/image-list: '{{`{{.app}}`}}=reg.rsn-okd.netcloud.lab:8880/{{`{{.app}}`}}/{{`{{.app}}`}}'
-        argocd-image-updater.argoproj.io/{{`{{.app}}`}}.update-strategy: newest-build
+        argocd-image-updater.argoproj.io/image-list: '{{app}}=reg.rsn-okd.netcloud.lab:8880/{{app}}/{{app}}'
+        argocd-image-updater.argoproj.io/{{app}}.update-strategy: newest-build
         argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
         argocd-image-updater.argoproj.io/git-branch: main
     spec:
-      project: '{{`{{.app}}`}}'
+      project: '{{app}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{`{{.namespace}}`}}'
+        namespace: '{{namespace}}'
       source:
         repoURL: https://github.com/NC-R/argocd.git
         targetRevision: main
-        path: apps/{{`{{.app}}`}}
+        path: apps/{{app}}
         helm:
           valuesObject:
             route:
-              host: '{{`{{.app}}`}}.{{`{{.namespace}}`}}.{{`{{.baseDomain}}`}}'
+              host: '{{app}}.{{namespace}}.{{baseDomain}}'
       syncPolicy:
         automated:
           prune: true
