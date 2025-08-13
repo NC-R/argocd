@@ -1,0 +1,4 @@
+name: kunde2
+namespace: kunde2
+app: app2
+baseDomain: apps.rsn-okd.netcloud.lab
