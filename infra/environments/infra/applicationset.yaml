@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/NC-R/argocd.git
         revision: main
         files:
-          - path: infra/environments/infra/apps/*.yaml   # eine Datei je App
+          - path: infra/environments/infra/apps/*.yaml
   template:
     metadata:
       name: 'infra-{{app}}'
@@ -30,7 +30,7 @@ spec:
         helm:
           valuesObject:
             route:
-              host: '{{app}}.{{namespace}}.{{baseDomain}}'
+              host: '{{app}}.{{baseDomain}}'
       syncPolicy:
         automated:
           prune: true

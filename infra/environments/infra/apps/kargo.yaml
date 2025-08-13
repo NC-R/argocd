@@ -1,3 +1,3 @@
 app: kargo
 namespace: kargo
-baseDomain: apps.rsn-okd.netcloud.lab
+baseDomain: infra.apps.rsn-okd.netcloud.lab
