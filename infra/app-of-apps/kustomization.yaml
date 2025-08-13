@@ -3,8 +3,7 @@ kind: Kustomization
 
 # Reihenfolge: erst Namespaces, dann Projects, dann Rest
 resources:
-  - /infra/namespaces
-  - /infra/argocd-projects
-  - /infra/customers/customers.yaml
-  - /infra/environments/staging1/applicationset.yaml
-  - /infra/environments/prod/applicationset.yaml
+  - ../namespaces
+  - ../argocd-projects
+  - ../environments/staging1/applicationset.yaml
+  - ../environments/prod/applicationset.yaml
