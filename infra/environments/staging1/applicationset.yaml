@@ -10,7 +10,7 @@ spec:
         repoURL: https://github.com/NC-R/argocd.git
         revision: main
         files:
-          - path: infra/customers/customers.yaml
+          - path: infra/environments/staging1/apps/*.yaml   # <- ein File je App
   template:
     metadata:
       name: 'staging1-{{`{{.app}}`}}'
@@ -23,7 +23,7 @@ spec:
       project: '{{`{{.app}}`}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: staging1
+        namespace: '{{`{{.namespace}}`}}'
       source:
         repoURL: https://github.com/NC-R/argocd.git
         targetRevision: main
@@ -31,7 +31,7 @@ spec:
         helm:
           valuesObject:
             route:
-              host: '{{`{{.app}}`}}.staging1.{{`{{.baseDomain}}`}}'
+              host: '{{`{{.app}}`}}.{{`{{.namespace}}`}}.{{`{{.baseDomain}}`}}'
       syncPolicy:
         automated:
           prune: true

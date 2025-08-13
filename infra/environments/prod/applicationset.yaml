@@ -10,7 +10,7 @@ spec:
         repoURL: https://github.com/NC-R/argocd.git
         revision: main
         files:
-          - path: infra/customers/customers.yaml
+          - path: infra/customers/*/*.yaml     # <- ein File je Kunde×App
   template:
     metadata:
       name: '{{`{{.name}}`}}-{{`{{.app}}`}}'
@@ -33,6 +33,7 @@ spec:
           valuesObject:
             route:
               host: '{{`{{.name}}`}}.{{`{{.app}}`}}.{{`{{.baseDomain}}`}}'
+      # Prod: manuelles Sync
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
