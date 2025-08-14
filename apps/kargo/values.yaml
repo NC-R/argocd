@@ -9,5 +9,6 @@ kargo:
 
 # Optional: Route/Ingress – wird vom ApplicationSet via valuesObject.route.host überschrieben
 route:
-  enabled: true
-  host: "kargo.infra.apps.rsn-okd.netcloud.lab"
+  enabled: false
+  host: kargo.infra.apps.rsn-okd.netcloud.lab
+
