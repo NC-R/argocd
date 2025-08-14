@@ -4,6 +4,10 @@ metadata:
     name: kargo
     namespace: argocd
 spec:
+    project: {{ .Values.argocdProject | default "default" | quote }}
+    destination:
+        namespace: {{ .Release.Namespace | default "kargo" | quote }}
+        server: https://kubernetes.default.svc
     source:
         repoURL: ghcr.io/akuity/kargo-charts
         chart: kargo
