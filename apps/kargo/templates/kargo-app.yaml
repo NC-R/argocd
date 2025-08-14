@@ -4,10 +4,6 @@ metadata:
     name: kargo
     namespace: argocd
 spec:
-    project: {{ .Values.argocdProject | default "default" | quote }}
-    destination:
-        namespace: {{ .Release.Namespace | default "kargo" | quote }}
-        server: https://kubernetes.default.svc
     source:
         repoURL: ghcr.io/akuity/kargo-charts
         chart: kargo
@@ -24,9 +20,20 @@ spec:
                         ingressClassName: "openshift-default"
                         tls:
                             selfSignedCert: {{ .Values.kargo.selfSignedCert }}
+                    resources:
+                        requests: { cpu: "100m", memory: "128Mi" }
+                        limits:   { cpu: "500m", memory: "512Mi" }
                 controller:
                     argocd:
                         namespace: "argocd"
+                    resources:
+                        requests: { cpu: "100m", memory: "128Mi" }
+                        limits:   { cpu: "500m", memory: "512Mi" }
+                webhookServer:
+                    resources:
+                        requests: { cpu: "50m",  memory: "64Mi"  }
+                        limits:   { cpu: "200m", memory: "256Mi" }
+
     syncPolicy:
         automated:
             prune: true
