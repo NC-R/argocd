@@ -12,6 +12,6 @@ spec:
     port:
         targetPort: https
     tls:
-        termination: edge
+        termination: reencrypt
         insecureEdgeTerminationPolicy: Redirect
 {{- end }}
