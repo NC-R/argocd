@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: kargo
+  labels:
+    app: kargo
+spec:
+  host: {{ .Values.route.host }}
+  to:
+    kind: Service
+    name: kargo-api
+  tls:
+    termination: edge

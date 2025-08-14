@@ -1,6 +1,13 @@
 kargo:
-  host: kargo.infra.apps.rsn-okd.netcloud.lab
-  selfSignedCert: true
+  api:
+    adminAccount:
+      passwordHash: "$2y$10$g7nY0hpZVrfayOiMQ.8U1.oOWgeQA6.uslUW7fDu25VRdnmO0UTDG"
+      tokenSigningKey: "iSE4qYP6zkazO83u7LnFXME5eW1k86ay"
+      tokenTTL: 24h
+  controller:
+    logLevel: INFO
+
+# Optional: Route/Ingress – wird vom ApplicationSet via valuesObject.route.host überschrieben
 route:
-  enabled: false
-  host: kargo.infra.apps.rsn-okd.netcloud.lab
+  enabled: true
+  host: "kargo.infra.apps.rsn-okd.netcloud.lab"
