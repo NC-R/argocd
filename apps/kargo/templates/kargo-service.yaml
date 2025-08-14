@@ -4,9 +4,9 @@ metadata:
   name: kargo-api
   namespace: kargo
 spec:
+  selector:
+    app.kubernetes.io/component: api
   ports:
     - name: http
       port: 80
       targetPort: 8080
-  selector:
-    app.kubernetes.io/component: api
