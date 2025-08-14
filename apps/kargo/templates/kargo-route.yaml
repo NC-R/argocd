@@ -1,0 +1,17 @@
+{{- if .Values.route.enabled }}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+    name: kargo
+    namespace: kargo
+spec:
+    host: {{ .Values.route.host | quote }}
+    to:
+        kind: Service
+        name: kargo-api
+    port:
+        targetPort: https
+    tls:
+        termination: edge
+        insecureEdgeTerminationPolicy: Redirect
+{{- end }}
