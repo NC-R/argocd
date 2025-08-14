@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kargo
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: kargo
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: ghcr.io/akuity/kargo-charts
+    chart: kargo
+    targetRevision: v1.7.2
+    helm:
+      valuesObject:
+        api:
+          host: kargo.apps.rsn-okd.netcloud.lab
+          adminAccount:
+            passwordHash: "$2y$10$klXQ2IfS5vsjxoLU2StCm.gPEoRgUczOT9CsxnwiBLU9XN9akBSg."
+            tokenSigningKey: "NNKuuEiu0FwwdriTlHyn6sWSJgPEc9Ri"
+          ingress:
+            enabled: true
+            ingressClassName: openshift-default
+            tls:
+              selfSignedCert: true
+        controller:
+          argocd:
+            namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
