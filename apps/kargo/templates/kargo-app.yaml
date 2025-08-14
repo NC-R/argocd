@@ -38,6 +38,17 @@ spec:
                         requests: { cpu: "50m",  memory: "64Mi"  }
                         limits:   { cpu: "200m", memory: "256Mi" }
 
+                externalWebhookServer:
+                    resources:
+                        requests: { cpu: "50m",  memory: "64Mi" }
+                        limits: { cpu: "200m", memory: "256Mi" }
+                collector:
+                    resources:
+                        requests: { cpu: "50m",  memory: "64Mi" }
+                        limits: { cpu: "200m", memory: "256Mi" }
+
+
+
     syncPolicy:
         automated:
             prune: true
