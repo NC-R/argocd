@@ -4,19 +4,26 @@ metadata:
   name: kargo
   namespace: argocd
 spec:
-  project: kargo                 # oder "default"
+  project: kargo            # oder "default", falls kein AppProject "kargo" existiert
   destination:
     server: https://kubernetes.default.svc
     namespace: kargo
-  source:
-    # vollständige OCI-Referenz inkl. Chartname
-    repoURL: oci://ghcr.io/akuity/kargo-charts/kargo
-    # Für OCI-Helm-Charts muss path immer "." sein
-    path: .
-    targetRevision: 1.7.2        # gewünschte Chart-Version
-    helm:
-      releaseName: kargo
+  sources:
+    # 1) Kargo-Helm-Chart aus GHCR
+    - repoURL: ghcr.io/akuity/kargo-charts
+      chart: kargo
+      targetRevision: 1.7.2        # gewünschte Chart-Version
+      helm:
+        valueFiles:
+          - $values/apps/kargo/values.yaml  # Werte aus deinem Repo
+
+    # 2) Dein Repo mit Values und optionalen Zusatz-Manifesten
+    - repoURL: https://github.com/NC-R/argocd.git
+      targetRevision: main
+      ref: values
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
