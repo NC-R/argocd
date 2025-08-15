@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kargo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://akuity.github.io/kargo-charts
+    chart: kargo
+    targetRevision: 1.7.2
+    helm:
+      releaseName: kargo
+      parameters:
+        - name: service.type
+          value: LoadBalancer
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kargo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
