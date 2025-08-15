@@ -8,8 +8,3 @@ spec:
   to:
     kind: Service
     name: kargo-api
-  port:
-    targetPort: https
-  tls:
-    termination: edge
-    insecureEdgeTerminationPolicy: Redirect
