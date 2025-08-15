@@ -1,4 +1,0 @@
-app: kargo
-namespace: kargo
-baseDomain: infra.apps.rsn-okd.netcloud.lab
-project: kargo

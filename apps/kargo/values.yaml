@@ -1,9 +1,0 @@
-kargo:
-  api:
-    adminAccount:
-      passwordHash: "$2y$10$5jRQc6ww79hew0FeCuN3K.h9EV.8cJsnt5dA9BRvxXE91j4I/9Ax6"
-      tokenSigningKey: "034p2J1a31gCCroyCWmd0k3Gzxjnzqnb"
-
-  controller:
-    logLevel: INFO
-
