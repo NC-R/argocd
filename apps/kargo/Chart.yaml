@@ -1,0 +1,10 @@
+apiVersion: v2
+name: kargo-umbrella
+description: "Wrapper chart that installs the upstream Kargo Helm chart via dependency"
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: kargo
+    version: 1.7.2
+    repository: oci://ghcr.io/akuity/kargo-charts
