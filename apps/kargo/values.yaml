@@ -1,22 +1,22 @@
-api:
-  adminAccount:
-    # Bcrypt-Hash des Admin-Passworts (Achtung: im values.yaml NICHT doppelt escapen)
-    passwordHash: "$2y$10$5jRQc6ww79hew0FeCuN3K.h9EV.8cJsnt5dA9BRvxXE91j4I/9Ax6"
-    tokenSigningKey: "034p2J1a31gCCroyCWmd0k3Gzxjnzqnb"
-  resources:
-    requests:
-      cpu: "200m"
-      memory: "256Mi"
-    limits:
-      cpu: "500m"
-      memory: "512Mi"
+kargo:
+  api:
+    adminAccount:
+      passwordHash: "$2y$10$5jRQc6ww79hew0FeCuN3K.h9EV.8cJsnt5dA9BRvxXE91j4I/9Ax6"
+      tokenSigningKey: "034p2J1a31gCCroyCWmd0k3Gzxjnzqnb"
+    resources:
+      requests:
+        cpu: "200m"
+        memory: "256Mi"
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
 
-controller:
-  logLevel: INFO
-  resources:
-    requests:
-      cpu: "200m"
-      memory: "256Mi"
-    limits:
-      cpu: "500m"
-      memory: "512Mi"
+  controller:
+    logLevel: INFO
+    resources:
+      requests:
+        cpu: "200m"
+        memory: "256Mi"
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
