@@ -7,8 +7,7 @@ kargo:
   controller:
     logLevel: INFO
 
-# Optional: Route/Ingress – wird vom ApplicationSet via valuesObject.route.host überschrieben
 route:
   enabled: false
-  host: kargo.infra.apps.rsn-okd.netcloud.lab
+  host: ""
 
