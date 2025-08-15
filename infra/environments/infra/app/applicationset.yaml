@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: infra-apps
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/NC-R/argocd.git
+        revision: main
+        files:
+          - path: infra/environments/infra/app/apps/*.yaml
+  template:
+    metadata:
+      name: 'infra-{{app}}'
+    spec:
+      project: '{{project}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}'
+      source:
+        repoURL: https://github.com/NC-R/argocd.git
+        targetRevision: main
+        path: apps/{{app}}
+        directory:
+          recurse: true
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

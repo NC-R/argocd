@@ -6,4 +6,6 @@ resources:
   - argocd-projects
   - environments/staging1/applicationset.yaml
   - environments/prod/applicationset.yaml
-  - environments/infra/applicationset.yaml
+  - environments/infra/helm/applicationset.yaml
+  - environments/infra/app/applicationset.yaml
+
