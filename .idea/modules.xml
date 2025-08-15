@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/argocd.iml" filepath="$PROJECT_DIR$/.idea/argocd.iml" />
       <module fileurl="file://$PROJECT_DIR$/../git-deployment/.idea/git-deployment.iml" filepath="$PROJECT_DIR$/../git-deployment/.idea/git-deployment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../kargo/.idea/kargo.iml" filepath="$PROJECT_DIR$/../kargo/.idea/kargo.iml" />
     </modules>
   </component>
 </project>

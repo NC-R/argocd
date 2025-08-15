@@ -5,5 +5,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="git-deployment" />
+    <orderEntry type="module" module-name="kargo" />
   </component>
 </module>
