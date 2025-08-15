@@ -4,19 +4,16 @@ metadata:
   name: kargo
   namespace: argocd
 spec:
-  project: default
-  source:
-    repoURL: https://akuity.github.io/kargo-charts
-    chart: kargo
-    targetRevision: 1.7.2
-    helm:
-      releaseName: kargo
-      parameters:
-        - name: service.type
-          value: LoadBalancer
+  project: kargo            # oder "default"
   destination:
     server: https://kubernetes.default.svc
     namespace: kargo
+  source:
+    repoURL: oci://ghcr.io/akuity/kargo-charts   # <- OCI Registry
+    chart: kargo
+    targetRevision: 1.7.2                        # oder gewünschte Version
+    helm:
+      releaseName: kargo
   syncPolicy:
     automated:
       prune: true
