@@ -4,7 +4,6 @@ metadata:
   name: infra-apps
   namespace: argocd
 spec:
-  # Gemeinsame Basis – wird für beide Fälle verwendet und dann per templatePatch angepasst
   template:
     metadata:
       name: 'infra-{{app}}'
@@ -22,7 +21,6 @@ spec:
         repoURL: https://github.com/NC-R/argocd.git
         targetRevision: main
         path: apps/{{app}}
-        # Helm bleibt in der Basisschablone; wird im "app"-Fall per Patch entfernt
         helm:
           releaseName: '{{app}}'
           valuesObject:
@@ -36,43 +34,39 @@ spec:
           - CreateNamespace=true
 
   generators:
-    # 1) TYPE = app  → Directory-Modus (application.yaml etc.)
+    # 1) Nur die Param-Dateien mit type: app  -> Directory-Modus
     - git:
         repoURL: https://github.com/NC-R/argocd.git
         revision: main
         files:
           - path: infra/environments/infra/apps/*.yaml
-        # Nur die Einträge mit type: app
-        selectors:
-          - matchExpressions:
-              - key: type
-                operator: In
-                values: ["app"]
-        templatePatch: |
-          spec:
-            source:
-              # Helm ausschalten (löschen) und Directory aktivieren
-              helm: null
-              directory:
-                recurse: true
-            # (Optional) Image-Updater-Annotationen in diesem Modus entfernen
-          metadata:
-            annotations:
-              argocd-image-updater.argoproj.io/image-list: null
-              argocd-image-updater.argoproj.io/{{app}}.update-strategy: null
-              argocd-image-updater.argoproj.io/write-back-method: null
-              argocd-image-updater.argoproj.io/git-branch: null
+      selector:
+        matchExpressions:
+          - key: type
+            operator: In
+            values: ["app"]
+      templatePatch: |
+        spec:
+          source:
+            helm: null
+            directory:
+              recurse: true
+        metadata:
+          annotations:
+            argocd-image-updater.argoproj.io/image-list: null
+            argocd-image-updater.argoproj.io/{{app}}.update-strategy: null
+            argocd-image-updater.argoproj.io/write-back-method: null
+            argocd-image-updater.argoproj.io/git-branch: null
 
-    # 2) TYPE != app (oder nicht gesetzt) → Helm-Modus (Chart im Ordner)
+    # 2) Alle übrigen Param-Dateien (ohne type oder type != app) -> Helm-Modus
     - git:
         repoURL: https://github.com/NC-R/argocd.git
         revision: main
         files:
           - path: infra/environments/infra/apps/*.yaml
-        # Alles außer type: app
-        selectors:
-          - matchExpressions:
-              - key: type
-                operator: NotIn
-                values: ["app"]
-        # Kein Patch nötig – Basistemplate rendert Helm
+      selector:
+        matchExpressions:
+          - key: type
+            operator: NotIn
+            values: ["app"]
+      # Kein templatePatch nötig – Basistemplate rendert Helm
