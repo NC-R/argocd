@@ -4,7 +4,6 @@ metadata:
   name: infra-apps
   namespace: argocd
 spec:
-  goTemplate: true
   generators:
     - git:
         repoURL: https://github.com/NC-R/argocd.git
@@ -13,35 +12,26 @@ spec:
           - path: infra/environments/infra/apps/*.yaml
   template:
     metadata:
-      name: 'infra-{{ .app }}'
+      name: 'infra-{{app}}'
       annotations:
-        {{- if ne (default "helm" .type) "app" }}
-        argocd-image-updater.argoproj.io/image-list: '{{ .app }}=reg.rsn-okd.netcloud.lab:8880/{{ .app }}/{{ .app }}'
-        argocd-image-updater.argoproj.io/{{ .app }}.update-strategy: newest-build
+        argocd-image-updater.argoproj.io/image-list: '{{app}}=reg.rsn-okd.netcloud.lab:8880/{{app}}/{{app}}'
+        argocd-image-updater.argoproj.io/{{app}}.update-strategy: newest-build
         argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
         argocd-image-updater.argoproj.io/git-branch: main
-        {{- end }}
     spec:
-      project: '{{ default "default" .project | default .app }}'
+      project: '{{project}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{ .namespace }}'
+        namespace: '{{namespace}}'
       source:
         repoURL: https://github.com/NC-R/argocd.git
         targetRevision: main
-        path: 'apps/{{ .app }}'
-        {{- if eq (default "helm" .type) "app" }}
-        directory:
-          recurse: true
-          include:
-            - application.yaml
-        {{- else }}
+        path: apps/{{app}}
         helm:
-          releaseName: '{{ .app }}'
+          releaseName: '{{app}}'
           valuesObject:
             route:
-              host: '{{ .app }}.{{ .baseDomain }}'
-        {{- end }}
+              host: '{{app}}.{{baseDomain}}'
       syncPolicy:
         automated:
           prune: true
