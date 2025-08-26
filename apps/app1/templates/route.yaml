@@ -3,10 +3,6 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   name: {{ include "app1.fullname" . }}
-  labels:
-    app.kubernetes.io/name: {{ include "app1.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/part-of: {{ include "app1.name" . }}
 spec:
   host: {{ required "route.host is required" .Values.route.host }}
   to:

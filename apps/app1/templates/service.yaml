@@ -5,8 +5,6 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ include "app1.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/part-of: {{ include "app1.name" . }}
-
 spec:
   type: {{ .Values.service.type }}
   selector:
