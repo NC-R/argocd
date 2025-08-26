@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/NC-R/argocd.git
         revision: main
         files:
-          - path: infra/customers/*/*.yaml     # eine Datei je Kunde×App
+          - path: custom/customers/*/*.yaml     # eine Datei je Kunde×App
   template:
     metadata:
       name: '{{name}}-{{app}}'

@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/NC-R/argocd.git
         revision: main
         files:
-          - path: infra/environments/staging1/apps/*.yaml   # eine Datei je App
+          - path: custom/environments/staging1/apps/*.yaml   # eine Datei je App
   template:
     metadata:
       name: 'staging1-{{app}}'
