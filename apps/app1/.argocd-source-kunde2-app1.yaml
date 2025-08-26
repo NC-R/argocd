@@ -1,0 +1,8 @@
+helm:
+  parameters:
+  - name: image.name
+    value: reg.rsn-okd.netcloud.lab:8880/app1/app1
+    forcestring: true
+  - name: image.tag
+    value: prod-20250815-0715
+    forcestring: true
